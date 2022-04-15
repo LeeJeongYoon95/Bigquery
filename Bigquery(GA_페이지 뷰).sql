@@ -1,5 +1,5 @@
 - 최종 쿼리(페이지뷰). 평균 페이지 시간은 따로 해서 inner join 해야함 
-- 왜냐하면 페이지 시간은 type page 처리가 필요하고 이외의 것들은 필요가 없어서.
+- 왜냐하면 페이지 시간은 type page 처리가 필요하고 이외의 것들은 필요가 없.
 
   WITH avg_time AS (
 SELECT 
@@ -31,7 +31,7 @@ SELECT
        
  
  FROM
- `bhjeong-1.171781649.ga_sessions_*` , unnest(hits) AS hits  WHERE _table_suffix BETWEEN '20210101' AND '20211231'
+ `bigquery-public-data.google_analytics_sample.ga_sessions_*` , unnest(hits) AS hits  WHERE _table_suffix BETWEEN '20210101' AND '20211231'
     )
   WHERE hitType = 'PAGE'  
     )
@@ -103,7 +103,7 @@ FROM (
             MIN(hits.hitNumber) OVER (PARTITION BY fullVisitorId, visitStartTime) AS first_hit,
             avg_time_on_page
 
-            FROM `bhjeong-1.171781649.ga_sessions_*` , UNNEST(hits) AS hits
+            FROM `bigquery-public-data.google_analytics_sample.ga_sessions_*` , UNNEST(hits) AS hits
             LEFT JOIN avg_time ON hits.page.pagepath = avg_time.page
   WHERE _table_suffix BETWEEN '20210101' AND '20211231'))
   
