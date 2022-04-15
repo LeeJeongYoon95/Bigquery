@@ -21,7 +21,7 @@ SELECT
   COUNT(DISTINCT CONCAT(fullvisitorid,visitId, visitstartTime, COALESCE(hits.eventinfo.eventCategory,''), 
                                                  COALESCE(hits.eventinfo.eventaction,''), COALESCE(hits.eventinfo.eventlabel, ''))) uniqueEvents
 FROM
-  `bhjeong-1.171781649.ga_sessions_*` t, unnest(hits) as hits
+  `bigquery-public-data.google_analytics_sample.ga_sessions_*` t, unnest(hits) as hits
 WHERE
   _TABLE_SUFFIX BETWEEN '20210101' AND '20211231' AND hits.type='EVENT' AND hits.eventInfo.eventCategory is not null
 GROUP BY 1
